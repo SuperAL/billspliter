@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>BillSpliter</title>
+    <!-- UIkit CSS -->
+    <link rel="stylesheet" href="css/uikit.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="app">
+        <div class="uk-container uk-container-small">
+            <h1 class="uk-heading-primary uk-margin-top" v-cloak>{{ appName }}</h1>
+            <div class="uk-section uk-section-default uk-padding-small">
+                <div class="uk-container">
+                    <h3>Eater</h3>
+                    <p>
+                        <button v-for="(eater, index) in eaters" class="uk-button uk-button-default uk-button-small uk-margin-right" :style="{ borderColor: activeEater.name == eater.name ? eater.color : '#e5e5e5'}" @click="switchActive(eater.name, index)"><i class="mark-bullet" :style="{ backgroundColor: eater.color }"></i><span v-cloak class="uk-text-capitalize">{{ eater.name }}</span></button>
+                        <span uk-icon="icon: plus" @click="addEater"></span>
+                    </p>
+                </div>
+            </div>
+            <div class="uk-section uk-section-default uk-padding-small">
+                <div class="uk-container">
+                    <h3>Bill</h3>
+                    <dl class="uk-description-list">
+                        <dt>Meal Ordering</dt>
+                        <dd class="uk-margin">
+                            <input class="uk-input uk-form-width-large uk-margin-right" type="text" placeholder="Divide prices by ','  i.e. 20,30,15,10" v-model="orderingInput">
+                            <button class="uk-button uk-button-danger" @click="genOrdering">Generate</button>
+                        </dd>
+                        <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid checkbox-wrapper">
+                            <label v-for="(item, index) in currentOrdering" v-cloak>
+                                <input class="uk-checkbox" type="checkbox" :disabled="!activeEater.name || (item.eater !== '' && activeEater.name !== item.eater)" @change="checkPrice($event, item.value, index)">{{item.value}}</label>
+                        </div>
+                        <dt>Other</dt>
+                        <dd class="uk-margin">
+                            <input class="uk-input uk-form-width-large uk-margin-right" type="text" placeholder="Divide prices by ','  i.e. 20,30,15,10" v-model="otherInput">
+                            <button class="uk-button uk-button-danger" @click="genOther">Generate</button>
+                            <p v-cloak>{{currentOther}}</p>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+             <div class="uk-section uk-section-default uk-padding-small">
+                <div class="uk-container">
+                    <h3>Cost</h3>
+                    <ul class="uk-list">
+                        <li class="uk-display-inline-block uk-margin-right uk-margin-remove-top" v-for="eater in eaters"><i class="mark-bullet" :style="{ backgroundColor: eater.color }"></i><span v-cloak class="uk-text-capitalize">{{ eater.name }} : </span><span v-cloak>{{ eater.cost }}</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery is required -->
+    <script src="js/jquery.min.js"></script>
+    <!-- UIkit JS -->
+    <script src="js/uikit.min.js"></script>
+    <script src="js/uikit-icons.min.js"></script>
+    <!-- Vue JS -->
+    <script src="js/vue.js"></script>
+    <script src="js/randomColor.js"></script>
+    <script src="js/main.js"></script>
+</body>
+
+</html>

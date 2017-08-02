@@ -1,0 +1,36 @@
+[v-cloak] { 
+  display: none;
+}
+
+.mark-bullet {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	background-color: #eee;
+	margin-right: 10px;
+}
+
+.uk-button.active {
+  border-color: #1e87f0;
+}
+.uk-checkbox {
+	margin-right: 5px;
+}
+
+.checkbox-wrapper {
+	position: relative;
+}
+.cover {
+	display: none;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	cursor: not-allowed;
+	z-index: 2;
+}
+.disabled .cover {
+	display: block;
+}
