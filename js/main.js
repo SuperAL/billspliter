@@ -1,3 +1,31 @@
+/**
+ * 存储localStorage
+ */
+ var setStore = function(name, content) {
+    if (!name) return;
+    if (typeof content !== 'string') {
+        content = JSON.stringify(content);
+    }
+    window.localStorage.setItem(name, content);
+}
+
+/**
+ * 获取localStorage
+ */
+ var getStore = function(name) {
+    if (!name) return;
+    return JSON.parse(window.localStorage.getItem(name));
+}
+
+/**
+ * 删除localStorage
+ */
+ var removeStore = function(name) {
+    if (!name) return;
+    window.localStorage.removeItem(name);
+}
+
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -9,6 +37,9 @@ var app = new Vue({
         currentOrdering: [],
         currentOther: ''
     },
+    created: function() {
+        this.eaters = getStore('eaters') || [];
+    },
     computed: {
     	currentTotal: function() {
     		// currentOrdering total
@@ -18,6 +49,11 @@ var app = new Vue({
     		})
     		return temp;
     	}
+    },
+    watch: {
+        eaters: function(newVal) {
+            setStore('eaters', newVal);
+        }
     },
     methods: {
         addEater: function() {
@@ -34,6 +70,9 @@ var app = new Vue({
                     })
                 }
             });
+        },
+        deleteEater: function(index) {
+            this.eaters.splice(index, 1);
         },
         switchActive: function(eater, index) {
             this.activeEater = {
@@ -81,3 +120,5 @@ var app = new Vue({
         }
     }
 })
+
+

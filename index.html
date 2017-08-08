@@ -26,7 +26,7 @@
                 <div class="uk-container">
                     <h3>Eater</h3>
                     <p>
-                        <button v-for="(eater, index) in eaters" class="uk-button uk-button-default uk-button-small uk-margin-right" :style="{ borderColor: activeEater.name == eater.name ? eater.color : '#e5e5e5'}" @click="switchActive(eater.name, index)"><i class="mark-bullet" :style="{ backgroundColor: eater.color }"></i><span v-cloak class="uk-text-capitalize">{{ eater.name }}</span></button>
+                        <button v-for="(eater, index) in eaters" class="uk-button uk-button-default uk-button-small uk-margin-right" :style="{ borderColor: activeEater.name == eater.name ? eater.color : '#e5e5e5'}" @click="switchActive(eater.name, index)" @dblclick="deleteEater(index)"><i class="mark-bullet" :style="{ backgroundColor: eater.color }"></i><span v-cloak class="uk-text-capitalize">{{ eater.name }}</span></button>
                         <span uk-icon="icon: plus" @click="addEater"></span>
                     </p>
                 </div>
