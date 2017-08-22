@@ -1,7 +1,7 @@
 /**
  * 存储localStorage
  */
- var setStore = function(name, content) {
+var setStore = function(name, content) {
     if (!name) return;
     if (typeof content !== 'string') {
         content = JSON.stringify(content);
@@ -12,7 +12,7 @@
 /**
  * 获取localStorage
  */
- var getStore = function(name) {
+var getStore = function(name) {
     if (!name) return;
     return JSON.parse(window.localStorage.getItem(name));
 }
@@ -20,7 +20,7 @@
 /**
  * 删除localStorage
  */
- var removeStore = function(name) {
+var removeStore = function(name) {
     if (!name) return;
     window.localStorage.removeItem(name);
 }
@@ -41,14 +41,14 @@ var app = new Vue({
         this.eaters = getStore('eaters') || [];
     },
     computed: {
-    	currentTotal: function() {
-    		// currentOrdering total
-    		var temp = 0;
-    		this.orderingInput.split(',').forEach(function(element) {
-    			temp += Number(element);
-    		})
-    		return temp;
-    	}
+        currentTotal: function() {
+            // currentOrdering total
+            var temp = 0;
+            this.orderingInput.split(',').forEach(function(element) {
+                temp += Number(element);
+            })
+            return temp;
+        }
     },
     watch: {
         eaters: function(newVal) {
@@ -100,25 +100,24 @@ var app = new Vue({
         checkPrice: function(e, value, index) {
             var eaterIndex = this.activeEater.index;
             if (e.target.checked) {
-            		this.currentOrdering[index]['eater'] = this.activeEater.name;
+                this.currentOrdering[index]['eater'] = this.activeEater.name;
                 this.eaters[eaterIndex]['orders'][index] = value;
             } else {
-	            	this.currentOrdering[index]['eater'] = '';
+                this.currentOrdering[index]['eater'] = '';
                 delete this.eaters[eaterIndex]['orders'][index];
             }
 
             // compute costs
-            var personTotal = 0, personOther = 0;
+            var personTotal = 0,
+                personOther = 0;
             var orders = this.eaters[eaterIndex]['orders'];
             for (var key in orders) {
-            	personTotal += Number(orders[key]);
+                personTotal += Number(orders[key]);
             }
             if (this.currentOther !== 0) {
-	           	personOther = personTotal/this.currentTotal*this.currentOther;
+                personOther = personTotal / this.currentTotal * this.currentOther;
             }
             this.eaters[eaterIndex]['cost'] = (personTotal + personOther).toFixed(2);
         }
     }
 })
-
-
