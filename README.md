@@ -15,6 +15,9 @@ A quick way to help you split your bill.
 ![step1-addEaters](/images/step3-outputCosts.gif)
 
 # 更新
+## 2017.08.22
+1. 新增离线缓存功能（service worker）
+
 ## 2017.08.08
 1. 双击删除 Eater
 2. Eater 信息默认存储在本地，不手动清除 localStorage 就不会删除
