@@ -39,7 +39,7 @@
                     <dl class="uk-description-list">
                         <dt>Meal Ordering</dt>
                         <dd class="uk-margin">
-                            <input class="uk-input uk-form-width-large uk-margin-right" type="text" placeholder="Divide prices by ','  i.e. 20,30,15,10" v-model="orderingInput">
+                            <input class="uk-input uk-form-width-large uk-margin-right" type="text" placeholder="Divide prices by ','  e.g. 20,30,15,10" v-model="orderingInput">
                             <button class="uk-button uk-button-danger" @click="genOrdering">Generate</button>
                         </dd>
                         <div class="uk-margin uk-grid-small uk-child-width-auto uk-grid checkbox-wrapper">
@@ -47,10 +47,12 @@
                                 <input class="uk-checkbox" type="checkbox" :disabled="!activeEater.name || (item.eater !== '' && activeEater.name !== item.eater)" @change="checkPrice($event, item.value, index)">{{item.value}}</label>
                         </div>
                         <dt>Other</dt>
+                        <dd class="uk-margin" v-cloak>
+                            <input class="uk-input uk-form-width-large uk-margin-right" type="text" placeholder="Input final bill, e.g. 45.5" readonly disabled v-model="currentOther"></dd>
+                        <dt>Actual Total</dt>
                         <dd class="uk-margin">
-                            <input class="uk-input uk-form-width-large uk-margin-right" type="text" placeholder="Divide prices by ','  i.e. 20,30,15,10" v-model="otherInput">
-                            <button class="uk-button uk-button-danger" @click="genOther">Generate</button>
-                            <p v-cloak>{{currentOther}}</p>
+                            <input class="uk-input uk-form-width-large uk-margin-right" type="text" placeholder="Input final bill, e.g. 45.5" v-model.number="totalInput">
+                            <!-- <button class="uk-button uk-button-danger" @click="genOther">Confirm</button> -->
                         </dd>
                     </dl>
                 </div>
