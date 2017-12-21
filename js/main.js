@@ -35,7 +35,8 @@ var app = new Vue({
         orderingInput: '',
         otherInput: '',
         currentOrdering: [],
-        currentOther: ''
+        // currentOther: '',
+        totalInput: ''
     },
     created: function() {
         this.eaters = getStore('eaters') || [];
@@ -48,11 +49,17 @@ var app = new Vue({
                 temp += Number(element);
             })
             return temp;
+        },
+        currentOther: function() {
+            return (this.totalInput-this.currentTotal).toFixed(2)
         }
     },
     watch: {
         eaters: function(newVal) {
             setStore('eaters', newVal);
+        },
+        totalInput: function(newVal) {
+            
         }
     },
     methods: {
