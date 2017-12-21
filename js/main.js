@@ -44,7 +44,7 @@ var app = new Vue({
         currentTotal: function() {
             // currentOrdering total
             var temp = 0;
-            this.orderingInput.split(',').forEach(function(element) {
+            this.orderingInput.split(/[,，]/g).forEach(function(element) {
                 temp += Number(element);
             })
             return temp;
@@ -82,7 +82,7 @@ var app = new Vue({
         },
         genOrdering: function() {
             var temp = [];
-            this.orderingInput.split(',').forEach(function(element) {
+            this.orderingInput.split(/[,，]/g).forEach(function(element) {
                 temp.push({
                     value: element,
                     eater: ''
@@ -92,7 +92,7 @@ var app = new Vue({
         },
         genOther: function() {
             var temp = 0;
-            this.otherInput.split(',').forEach(function(element) {
+            this.otherInput.split(/[,，]/g).forEach(function(element) {
                 temp += Number(element);
             })
             this.currentOther = temp;
